@@ -1,11 +1,13 @@
-import "../assets/css/userForm.css";
+import "../assets/css/productForm.css";
 import { useState } from 'react';
 
-function EditUser ({product, clearProduct, selectProduct}) {
+function EditProduct ({product, clearProduct, selectProduct}) {
 
     const [message_create, setCreate] = useState("");
     const [message_edit, setEdit] = useState("");
 
+
+    //Forms to deal with the inputs and send to the BACKEND
     const [formCreate, setFormCreate] = useState({
         name_product  : "",
         description_product  : "",
@@ -23,6 +25,8 @@ function EditUser ({product, clearProduct, selectProduct}) {
         available_online : String(product.available_online)
     });
 
+
+    //Functions to sync the inputs with its respective form
     const handleInputCreate = (e) => {
         setFormCreate((prevFormCreate) => ({
             ...prevFormCreate,
@@ -40,10 +44,11 @@ function EditUser ({product, clearProduct, selectProduct}) {
     const createProduct = async (e) =>{
         e.preventDefault();
 
+        //Validation for no empty spaces
         for (const key in formCreate) {
             if (!formCreate[key].trim()) {
                 setCreate("Please fill all the inputs in the form!");
-                return; // Para a execução da função
+                return;
             }
         }
 
@@ -63,7 +68,7 @@ function EditUser ({product, clearProduct, selectProduct}) {
                     price : "", stock : "", available_online : ""
                 });
             }
-            else setCreate("Error adding user" + data.message);
+            else setCreate("Error adding product" + data.message);
         }
         catch ( error ) {
             setCreate("Error connecting to the server");
@@ -73,10 +78,11 @@ function EditUser ({product, clearProduct, selectProduct}) {
     const updateProduct = async (e) =>{
         e.preventDefault();
 
+        //Validation for no empty spaces
         for (const key in formUpdate){
             if (!formUpdate[key].trim()) {
                 setEdit("Please fill all the inputs in the form!");
-                return; // Para a execução da função
+                return;
             }
         }
 
@@ -90,6 +96,7 @@ function EditUser ({product, clearProduct, selectProduct}) {
 
             const data = await response.json();
 
+            //Updates the message and the object product from App.jsx
             if (response.ok){
                 setEdit("Product successfully updated");
                 selectProduct({
@@ -108,6 +115,7 @@ function EditUser ({product, clearProduct, selectProduct}) {
         }
     }
 
+    //Deletes a product from the database and clears the object product from App.jsx
     const deleteProduct = async () =>{
         try{
             const response = await fetch("http://localhost:8800/delete", {
@@ -206,4 +214,4 @@ function EditUser ({product, clearProduct, selectProduct}) {
     )
 }
 
-export default EditUser;
+export default EditProduct;

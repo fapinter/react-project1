@@ -55,7 +55,7 @@ function DataList( {setItemClicked} ){
   
   return(
     <div className="list-container">
-        <h1 className="list-name">Users List</h1>
+        <h1 className="list-name">Products List</h1>
         <ul className="list">
             {curr_products.map((product) => (
             <li key={product.id}className="item-list">

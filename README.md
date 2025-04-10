@@ -20,5 +20,4 @@ npm i cors express mysql mysql2 nodemon
 2. Go to the reactproject directory on the terminal
 3. Run the command "npm i" with all the items inside the "dependencies" part of the json file
 
-PS: the example command add only the after creating dependencies installed
-npm i classnames primereact primeicons react-router-dom
+npm i classnames primeicons primereact react react-dom react-router-dom react-scripts web-vitals
